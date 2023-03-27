@@ -26,6 +26,7 @@ function objectValidation(data, schema, instancePath, valdiate) {
         instancePath: [...instancePath, subSchema.name],
         message: "required field missing",
       });
+      return;
     }
 
     const ctx_ = valdiate(data_, subSchema, [...instancePath]);

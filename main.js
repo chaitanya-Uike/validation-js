@@ -39,7 +39,6 @@ const schema = {
 
 const data = {
   email: "test@email.com",
-  password: "Password123",
 };
 
 console.log(validateSchema(data, schema));
