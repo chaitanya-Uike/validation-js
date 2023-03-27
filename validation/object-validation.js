@@ -19,6 +19,15 @@ function objectValidation(data, schema, instancePath, valdiate) {
 
   schema.properties.forEach((subSchema) => {
     const data_ = data[subSchema.name];
+
+    if (subSchema.required && data_ === undefined) {
+      ctx.valid = false;
+      ctx.errors.push({
+        instancePath: [...instancePath, subSchema.name],
+        message: "required field missing",
+      });
+    }
+
     const ctx_ = valdiate(data_, subSchema, [...instancePath]);
 
     ctx.valid = ctx.valid && ctx_.valid;
