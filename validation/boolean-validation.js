@@ -11,6 +11,7 @@ function booleanValidation(data, schema, instancePath) {
         instancePath: [...instancePath, "type"],
         expected: "boolean",
         recieved: typeof data,
+        message: "boolean expected",
       },
     ];
     return ctx;
@@ -37,4 +38,4 @@ function booleanValidation(data, schema, instancePath) {
   return ctx;
 }
 
-export default booleanValidation;
+module.exports = booleanValidation;

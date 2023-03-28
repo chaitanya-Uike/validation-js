@@ -1,8 +1,8 @@
-import numberValidation from "./number-validation";
-import objectValidation from "./object-validation";
-import stringValidation from "./string-validation";
-import booleanValidation from "./boolean-validation";
-import arrayValidation from "./array-validation";
+const numberValidation = require("./number-validation");
+const objectValidation = require("./object-validation");
+const stringValidation = require("./string-validation");
+const booleanValidation = require("./boolean-validation");
+const arrayValidation = require("./array-validation");
 
 function validateSchema(data, schema) {
   return validate(data, schema, []);
@@ -23,4 +23,4 @@ function validate(data, schema, instancePath) {
     return arrayValidation(data, schema, path_, validate);
 }
 
-export default validateSchema;
+module.exports = validateSchema;

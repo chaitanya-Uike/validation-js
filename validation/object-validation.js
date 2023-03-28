@@ -12,6 +12,7 @@ function objectValidation(data, schema, instancePath, valdiate) {
         instancePath: [...instancePath, "type"],
         expected: "object",
         recieved: recievedType,
+        message: "object expected",
       },
     ];
     return ctx;
@@ -23,19 +24,19 @@ function objectValidation(data, schema, instancePath, valdiate) {
     if (subSchema.required && data_ === undefined) {
       ctx.valid = false;
       ctx.errors.push({
-        instancePath: [...instancePath, subSchema.name],
-        message: "required field missing",
+        instancePath: [...instancePath, subSchema.name, "required"],
+        message: `required field ${subSchema.name} missing`,
       });
       return;
+    } else if (data_ !== undefined) {
+      const ctx_ = valdiate(data_, subSchema, [...instancePath]);
+
+      ctx.valid = ctx.valid && ctx_.valid;
+      ctx.errors.push(...ctx_.errors);
     }
-
-    const ctx_ = valdiate(data_, subSchema, [...instancePath]);
-
-    ctx.valid = ctx.valid && ctx_.valid;
-    ctx.errors.push(...ctx_.errors);
   });
 
   return ctx;
 }
 
-export default objectValidation;
+module.exports = objectValidation;

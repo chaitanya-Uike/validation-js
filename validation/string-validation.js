@@ -1,4 +1,4 @@
-import { isNumeric } from "./utils";
+const { isNumeric } = require("./utils");
 
 function stringValidation(data, schema, instancePath) {
   const ctx = {
@@ -16,6 +16,7 @@ function stringValidation(data, schema, instancePath) {
         instancePath: [...instancePath, "type"],
         expected: "string",
         recieved: typeof data,
+        message: "string expected",
       },
     ];
     return ctx;
@@ -23,7 +24,7 @@ function stringValidation(data, schema, instancePath) {
 
   schema.validations.forEach((validation) => {
     const name = validation.name;
-    const value = validation.value.trim();
+    const value = validation.value;
 
     if (value === "") return;
 
@@ -112,4 +113,4 @@ function reviveRegex(regexString) {
   return new RegExp(m[1], m[2] || "");
 }
 
-export default stringValidation;
+module.exports = stringValidation;

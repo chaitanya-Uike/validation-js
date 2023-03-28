@@ -11,6 +11,7 @@ function arrayValidation(data, schema, instancePath, validate) {
         instancePath: [...instancePath, "type"],
         expected: "array",
         recieved: typeof data,
+        message: "array expected",
       },
     ];
     return ctx;
@@ -29,4 +30,4 @@ function arrayValidation(data, schema, instancePath, validate) {
   return ctx;
 }
 
-export default arrayValidation;
+module.exports = arrayValidation;

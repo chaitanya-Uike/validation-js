@@ -1,4 +1,4 @@
-import { isNumeric } from "./utils";
+const { isNumeric } = require("./utils");
 
 function numberValidation(data, schema, instancePath) {
   const ctx = {
@@ -13,6 +13,7 @@ function numberValidation(data, schema, instancePath) {
         instancePath: [...instancePath, "type"],
         expected: "number",
         recieved: typeof data,
+        message: "number expected",
       },
     ];
     return ctx;
@@ -20,9 +21,11 @@ function numberValidation(data, schema, instancePath) {
 
   schema.validations.forEach((validation) => {
     const name = validation.name;
-    const value = validation.value.trim();
 
-    if (value === "") return;
+    let value = validation.value;
+    if (typeof validation.value === "string") value = validation.value;
+
+    if (value === "" || value === undefined || value === null) return;
 
     if (name === "gt") {
       if (data <= value) {
@@ -61,7 +64,7 @@ function numberValidation(data, schema, instancePath) {
         });
       }
     } else if (name === "integer") {
-      if (!Number.isInteger(data)) {
+      if (value && !Number.isInteger(data)) {
         ctx.valid = false;
         ctx.errors.push({
           instancePath: [...instancePath, "validations", "integer"],
@@ -70,7 +73,7 @@ function numberValidation(data, schema, instancePath) {
         });
       }
     } else if (name === "positive") {
-      if (data <= 0) {
+      if (value && data <= 0) {
         ctx.valid = false;
         ctx.errors.push({
           instancePath: [...instancePath, "validations", "positive"],
@@ -79,7 +82,7 @@ function numberValidation(data, schema, instancePath) {
         });
       }
     } else if (name === "negative") {
-      if (data >= 0) {
+      if (value && data >= 0) {
         ctx.valid = false;
         ctx.errors.push({
           instancePath: [...instancePath, "validations", "negative"],
@@ -88,7 +91,7 @@ function numberValidation(data, schema, instancePath) {
         });
       }
     } else if (name === "non-negative") {
-      if (data < 0) {
+      if (value && data < 0) {
         ctx.valid = false;
         ctx.errors.push({
           instancePath: [...instancePath, "validations", "non-negative"],
@@ -97,7 +100,7 @@ function numberValidation(data, schema, instancePath) {
         });
       }
     } else if (name === "non-positive") {
-      if (data > 0) {
+      if (value && data > 0) {
         ctx.valid = false;
         ctx.errors.push({
           instancePath: [...instancePath, "validations", "non-positive"],
@@ -120,4 +123,4 @@ function numberValidation(data, schema, instancePath) {
   return ctx;
 }
 
-export default numberValidation;
+module.exports = numberValidation;
