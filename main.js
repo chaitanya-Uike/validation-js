@@ -1,44 +1,61 @@
-import validateSchema from "./validation";
-
 const schema = {
+  id: 1,
   type: "object",
+  name: "root",
   properties: [
     {
       type: "string",
-      validations: [
-        {
-          name: "match",
-          value:
-            '/^(([^<>()[\\]\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\\]\\.,;:\\s@\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\"]{2,})$/i',
-        },
-      ],
-      id: "1fb7c490-ad0b-4090-b106-1cd34aeefa0f",
-      name: "email",
-      required: true,
+      name: "1",
+      id: 1,
     },
     {
-      type: "string",
-      validations: [
+      type: "number",
+      name: "2",
+      id: 2,
+    },
+    {
+      type: "local_ref",
+      name: "3",
+      id: 3,
+      path: ["properties", 1],
+    },
+    {
+      type: "number",
+      name: "4",
+      id: 4,
+    },
+    {
+      type: "object",
+      name: "5",
+      id: 5,
+      properties: [
         {
-          name: "min",
-          value: "6",
+          type: "local_ref",
+          name: "6",
+          id: 6,
+          path: [],
         },
         {
-          name: "max",
-          value: "12",
+          type: "boolean",
+          name: "7",
+          id: 7,
         },
       ],
-      id: "2db1f322-952c-4c98-90fb-7f58d1431a2b",
-      name: "password",
-      required: true,
+    },
+    {
+      type: "local_ref",
+      name: "8",
+      id: 8,
+      path: ["properties", 4],
+    },
+    {
+      type: "local_ref",
+      name: "9",
+      id: 9,
+      path: ["properties", 4, 0],
     },
   ],
-  id: "d5203092-6f90-4272-9e15-c933e76795ac",
-  name: "employee_schema",
 };
 
-const data = {
-  email: "test@email.com",
-};
 
-console.log(validateSchema(data, schema));
+function resolveDependancy(schema, globalCtx)
