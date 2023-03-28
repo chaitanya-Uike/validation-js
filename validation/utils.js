@@ -1,5 +1,3 @@
-function isNumeric(n) {
+export function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
-
-module.exports = { isNumeric };

@@ -1,4 +1,4 @@
-function objectValidation(data, schema, instancePath, valdiate) {
+function objectValidation(data, schema, instancePath, valdiate, globalCtx) {
   const ctx = {
     valid: true,
     errors: [],
@@ -29,7 +29,7 @@ function objectValidation(data, schema, instancePath, valdiate) {
       });
       return;
     } else if (data_ !== undefined) {
-      const ctx_ = valdiate(data_, subSchema, [...instancePath]);
+      const ctx_ = valdiate(data_, subSchema, [...instancePath], globalCtx);
 
       ctx.valid = ctx.valid && ctx_.valid;
       ctx.errors.push(...ctx_.errors);
@@ -39,4 +39,4 @@ function objectValidation(data, schema, instancePath, valdiate) {
   return ctx;
 }
 
-module.exports = objectValidation;
+export default objectValidation;

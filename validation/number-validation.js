@@ -1,4 +1,4 @@
-const { isNumeric } = require("./utils");
+import { isNumeric } from "./utils";
 
 function numberValidation(data, schema, instancePath) {
   const ctx = {
@@ -123,4 +123,4 @@ function numberValidation(data, schema, instancePath) {
   return ctx;
 }
 
-module.exports = numberValidation;
+export default numberValidation;

@@ -1,4 +1,4 @@
-const { isNumeric } = require("./utils");
+import { isNumeric } from "./utils";
 
 function stringValidation(data, schema, instancePath) {
   const ctx = {
@@ -113,4 +113,4 @@ function reviveRegex(regexString) {
   return new RegExp(m[1], m[2] || "");
 }
 
-module.exports = stringValidation;
+export default stringValidation;

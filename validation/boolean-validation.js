@@ -38,4 +38,4 @@ function booleanValidation(data, schema, instancePath) {
   return ctx;
 }
 
-module.exports = booleanValidation;
+export default booleanValidation;

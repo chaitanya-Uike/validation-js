@@ -1,4 +1,4 @@
-function arrayValidation(data, schema, instancePath, validate) {
+function arrayValidation(data, schema, instancePath, validate, globalCtx) {
   const ctx = {
     valid: true,
     errors: [],
@@ -21,7 +21,7 @@ function arrayValidation(data, schema, instancePath, validate) {
 
   data.forEach((data_, index) => {
     const path_ = [...instancePath, index];
-    const ctx_ = validate(data_, itemSchema, path_);
+    const ctx_ = validate(data_, itemSchema, path_, globalCtx);
 
     ctx.valid = ctx.valid && ctx_.valid;
     ctx.errors.push(...ctx_.errors);
@@ -30,4 +30,4 @@ function arrayValidation(data, schema, instancePath, validate) {
   return ctx;
 }
 
-module.exports = arrayValidation;
+export default arrayValidation;
