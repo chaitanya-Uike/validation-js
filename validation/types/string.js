@@ -1,4 +1,4 @@
-import { isNumeric } from "./utils";
+import { isNumeric } from "../utils";
 
 function stringValidation(data, schema, instancePath) {
   const ctx = {

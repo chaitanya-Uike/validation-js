@@ -1,4 +1,4 @@
-import { isNumeric } from "./utils";
+import { isNumeric } from "../utils";
 
 function numberValidation(data, schema, instancePath) {
   const ctx = {
