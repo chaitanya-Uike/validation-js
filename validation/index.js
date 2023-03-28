@@ -3,6 +3,7 @@ import objectValidation from "./types/object";
 import stringValidation from "./types/string";
 import booleanValidation from "./types/boolean";
 import arrayValidation from "./types/array";
+import compositionValidation from "./types/compostion";
 import build from "./build";
 
 function validateSchema(data, schema) {
@@ -24,6 +25,8 @@ function validate(data, schema, instancePath, globalCtx) {
       return booleanValidation(data, schema, path_);
     case "array":
       return arrayValidation(data, schema, path_, validate, globalCtx);
+    case "composition":
+      return compositionValidation(data, schema, path_, validate, globalCtx);
     case "local_ref": {
       const referencedSchema = globalCtx.$def[schema.ref_id];
       return validate(data, referencedSchema, path_, globalCtx);

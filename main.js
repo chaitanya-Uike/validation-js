@@ -4,7 +4,7 @@ const schema = {
   id: 1,
   type: "composition",
   name: "schema",
-  kind: "or",
+  kind: "not",
   schemas: [
     {
       id: 2,
@@ -12,7 +12,7 @@ const schema = {
       name: "schema1",
       validations: [
         {
-          name: "min",
+          name: "max",
           value: "6",
         },
       ],
@@ -24,13 +24,13 @@ const schema = {
       validations: [
         {
           name: "gte",
-          value: "10",
+          value: 10,
         },
       ],
     },
   ],
 };
 
-const data = 11;
+const data = [];
 
 console.log(validateSchema(data, schema));

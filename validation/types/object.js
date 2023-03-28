@@ -29,7 +29,7 @@ function objectValidation(data, schema, instancePath, valdiate, globalCtx) {
       });
       return;
     } else if (data_ !== undefined) {
-      const ctx_ = valdiate(data_, subSchema, [...instancePath], globalCtx);
+      const ctx_ = valdiate(data_, subSchema, instancePath, globalCtx);
 
       ctx.valid = ctx.valid && ctx_.valid;
       ctx.errors.push(...ctx_.errors);
