@@ -10,13 +10,10 @@ function resolveDependancy(schema, globalCtx) {
   // if schema is already resolved return
   if (globalCtx.$def.hasOwnProperty(schema.id)) return remote_refs;
 
-  // add schema to globalCtx and mark as resolved
+  // add schema to globalCtx to mark it as resolved
   globalCtx.$def[schema.id] = schema;
 
   if (schema.type === "local_ref") {
-    // if referenced schema is already resolved return
-    if (globalCtx.$def.hasOwnProperty(schema.ref_id)) return remote_refs;
-
     const referencedSchema = resolvePath(globalCtx.root, schema.path);
     const sub_remote_refs = resolveDependancy(referencedSchema, globalCtx);
     remote_refs.push(...sub_remote_refs);

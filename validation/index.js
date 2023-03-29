@@ -11,6 +11,7 @@ function validateSchema(data, schema) {
   return validate(data, schema, [], globalCtx);
 }
 
+// TODO refactor using some design pattern
 function validate(data, schema, instancePath, globalCtx) {
   const path_ = [...instancePath, schema.name];
 

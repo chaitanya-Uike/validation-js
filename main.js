@@ -1,36 +1,31 @@
 import validateSchema from "./validation";
 
 const schema = {
-  id: 1,
-  type: "composition",
-  name: "schema",
-  kind: "not",
-  schemas: [
+  id: "1",
+  type: "object",
+  name: "test_schema",
+  properties: [
     {
-      id: 2,
+      id: "2",
       type: "string",
-      name: "schema1",
-      validations: [
-        {
-          name: "max",
-          value: "6",
-        },
-      ],
+      name: "country",
+      required: true,
     },
     {
-      id: 3,
-      type: "number",
-      name: "schema2",
-      validations: [
-        {
-          name: "gte",
-          value: 10,
-        },
-      ],
+      id: "3",
+      type: "string",
+      name: "postalcode",
+      required: true,
+    },
+  ],
+  validations: [
+    {
+      id: "4",
+      type: "composition",
     },
   ],
 };
 
-const data = [];
+const data = false;
 
 console.log(validateSchema(data, schema));
