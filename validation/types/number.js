@@ -19,7 +19,7 @@ function numberValidation(data, schema, instancePath) {
     return ctx;
   }
 
-  schema.validations.forEach((validation) => {
+  schema.validations?.forEach((validation) => {
     const name = validation.name;
 
     let value = validation.value;

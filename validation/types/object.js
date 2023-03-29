@@ -18,7 +18,7 @@ function objectValidation(data, schema, instancePath, validate, globalCtx) {
     return ctx;
   }
 
-  schema.properties.forEach((subSchema) => {
+  schema.properties?.forEach((subSchema) => {
     const data_ = data[subSchema.name];
 
     if (subSchema.required && data_ === undefined) {
@@ -34,6 +34,18 @@ function objectValidation(data, schema, instancePath, validate, globalCtx) {
       ctx.valid = ctx.valid && ctx_.valid;
       ctx.errors.push(...ctx_.errors);
     }
+  });
+
+  schema.validations?.forEach((validation) => {
+    const ctx_ = validate(
+      data,
+      validation,
+      [...instancePath, "validations"],
+      globalCtx
+    );
+
+    ctx.valid = ctx.valid && ctx_.valid;
+    ctx.errors.push(...ctx_.errors);
   });
 
   return ctx;
