@@ -15,23 +15,18 @@ function validateSchema(data, schema) {
 function validate(data, schema, instancePath, globalCtx) {
   const path_ = [...instancePath, schema.name];
 
-  switch (schema.type) {
-    case "object":
-      return objectValidation(data, schema, path_, validate, globalCtx);
-    case "string":
-      return stringValidation(data, schema, path_);
-    case "number":
-      return numberValidation(data, schema, path_);
-    case "boolean":
-      return booleanValidation(data, schema, path_);
-    case "array":
-      return arrayValidation(data, schema, path_, validate, globalCtx);
-    case "composition":
-      return compositionValidation(data, schema, path_, validate, globalCtx);
-    case "local_ref": {
-      const referencedSchema = globalCtx.$def[schema.ref_id];
-      return validate(data, referencedSchema, path_, globalCtx);
-    }
+  if (schema.type === "object")
+    return objectValidation(data, schema, path_, validate, globalCtx);
+  if (schema.type === "string") return stringValidation(data, schema, path_);
+  if (schema.type === "number") return numberValidation(data, schema, path_);
+  if (schema.type === "boolean") return booleanValidation(data, schema, path_);
+  if (schema.type === "array")
+    return arrayValidation(data, schema, path_, validate, globalCtx);
+  if (["or", "and", "xor", "not", "if then else"].includes(schema.type))
+    return compositionValidation(data, schema, path_, validate, globalCtx);
+  if (schema.type === "local_ref") {
+    const referencedSchema = globalCtx.$def[schema.ref_id];
+    return validate(data, referencedSchema, path_, globalCtx);
   }
 }
 

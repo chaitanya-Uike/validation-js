@@ -128,54 +128,29 @@ import validateSchema from "./validation";
 //   postalcode: usaCode,
 // };
 
-// console.log(validateSchema(data, schema));
-
 const schema = {
-  id: 1,
-  name: "user",
-  type: "object",
-  properties: [
+  id: "7ba06ff1-fc62-4bcb-91c0-2d89a47166d9",
+  type: "not",
+  name: "not_test",
+  required: false,
+  schemas: [
     {
-      id: 2,
-      name: "email",
+      id: "6e352338-dd9d-4018-bc9f-5fec28a9bb1f",
       type: "string",
-      validations: [
-        {
-          name: "match",
-          value:
-            '/^(([^<>()[\\]\\.,;:\\s@"]+(\\.[^<>()[\\]\\.,;:\\s@"]+)*)|(".+"))@(([^<>()[\\]\\.,;:\\s@"]+\\.)+[^<>()[\\]\\.,;:\\s@"]{2,})$/i',
-        },
-      ],
-      required: true,
-    },
-    {
-      id: 3,
-      name: "password",
-      type: "string",
-      validations: [
-        {
-          name: "min",
-          value: 6,
-        },
-        {
-          name: "max",
-          value: 12,
-        },
-      ],
-      required: true,
-    },
-    {
-      id: 3,
-      name: "confirm-password",
-      type: "string",
+      name: "schema",
+      required: false,
       validations: [],
-      required: true,
     },
-  ],
-  validations: [
     {
-      name: "equals",
-      properties: ["password", "confirm-password"],
+      id: "33b81748-19dd-41ea-8088-91109dbf1c55",
+      type: "number",
+      name: "schema",
+      required: false,
+      validations: [],
     },
   ],
 };
+
+const data = "hello";
+
+console.log(validateSchema(data, schema));

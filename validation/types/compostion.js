@@ -5,18 +5,18 @@ function compositionValidation(
   validate,
   globalCtx
 ) {
-  const kind = schema.kind;
-  const path_ = [...instancePath, kind];
+  const type = schema.type;
+  const path_ = [...instancePath, type];
 
-  if (kind === "or")
+  if (type === "or")
     return orCheck(data, schema.schemas, path_, validate, globalCtx);
-  else if (kind === "and")
+  else if (type === "and")
     return andCheck(data, schema.schemas, path_, validate, globalCtx);
-  else if (kind === "xor")
+  else if (type === "xor")
     return xorCheck(data, schema.schemas, path_, validate, globalCtx);
-  else if (kind === "not")
+  else if (type === "not")
     return notCheck(data, schema.schemas, path_, validate, globalCtx);
-  else if (kind === "if_then_else")
+  else if (type === "if then else")
     return ifThenElseCheck(data, schema, path_, validate, globalCtx);
 }
 
@@ -110,11 +110,13 @@ function notCheck(data, schemas, instancePath, validate, globalCtx) {
   if (passingSchema > 0) {
     return {
       valid: false,
-      errors: {
-        instancePath,
-        passingSchema,
-        message: "no schema should be valid",
-      },
+      errors: [
+        {
+          instancePath,
+          passingSchema,
+          message: "no schema should be valid",
+        },
+      ],
     };
   }
 

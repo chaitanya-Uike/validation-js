@@ -29,7 +29,7 @@ function stringValidation(data, schema, instancePath) {
     if (value === "") return;
 
     if (name === "min") {
-      if (data.length < value) {
+      if (data.length < parseInt(value)) {
         ctx.valid = false;
         ctx.errors.push({
           instancePath: [...instancePath, "validations", "min"],
@@ -38,7 +38,7 @@ function stringValidation(data, schema, instancePath) {
         });
       }
     } else if (name === "max") {
-      if (data.length > value) {
+      if (data.length > parseInt(value)) {
         ctx.valid = false;
         ctx.errors.push({
           instancePath: [...instancePath, "validations", "max"],
@@ -47,7 +47,7 @@ function stringValidation(data, schema, instancePath) {
         });
       }
     } else if (name === "length") {
-      if (data.length !== value) {
+      if (data.length !== parseInt(value)) {
         ctx.valid = false;
         ctx.errors.push({
           instancePath: [...instancePath, "validations", "length"],
